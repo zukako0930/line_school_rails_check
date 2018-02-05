@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<head>
+<style>
+  h1{
+    background-color: #93B874;
+  }
+  div{
+    font-size:15px;
+  }
+  }
+</style>
+</head>
+<h1 align = "left">
+  誰かがつぶやいているようです
+  <div align="right" ><%= link_to 'なんか言う', new_tweet_path %></div>
+</h1>
+
+
+<table align="center" bordercolor="#CC3333">
+  <thead>
+    <tr>
+      <th width="100">ユーザー名</th>
+      <th width="450">つぶやき</th>
+      <th width="200">Tweet date</th>
+      <th colspan="３"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tweets.each do |tweet| %>
+      <tr>
+        <td><%= tweet.usr_name %></td>
+        <td><%= tweet.content %></td>
+        <!--<td><%= tweet.tweet_date %></td>-->
+        <td><%= tweet.updated_at.strftime("%Y/%m/%d %X") %></td>
+        <td><%= link_to '詳しく見る', tweet %></td>
+        <td><%= link_to '編集', edit_tweet_path(tweet) %></td>
+        <td><%= link_to '削除', tweet, method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

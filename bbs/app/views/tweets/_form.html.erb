@@ -1,0 +1,33 @@
+<%= form_with(model: tweet, local: true) do |form| %>
+  <% if tweet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tweet.errors.count, "error") %> prohibited this tweet from being saved:</h2>
+
+      <ul>
+      <% tweet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field" align="center">
+    <%= form.label 'おなまえ' %>
+    <%= form.text_field :usr_name, id: :tweet_usr_name,:size=>"30"%>
+  </div>
+
+  <div class="field" align="center">
+    <%= form.label 'つぶやき' %>
+    <%= form.text_area :content, id: :tweet_content, :maxlength=>"140",size: "50x10"  %>
+  </div>
+
+  <div class="field" align="center">
+    <%= form.label '現在日時' %>
+    <!--<% form.date_select Date.today.to_time, id: :tweet_tweet_date %>-->
+    <%= Time.now.strftime("%Y/%m/%d %X") %>
+  </div>
+
+  <div class="actions" align="center">
+    <%= form.submit %>
+  </div>
+<% end %>
